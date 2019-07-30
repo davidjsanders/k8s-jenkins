@@ -9,7 +9,8 @@ spec:
   template:
     metadata:
       labels:
-        app: master
+        app: jenkins
+        role: master
     spec:
       containers:
       - name: master
@@ -45,7 +46,5 @@ spec:
             memory: 1500Mi
       volumes:
       - name: jenkins-home
-        gcePersistentDisk:
-          pdName: jenkins-home
-          fsType: ext4
-          partition: 1
+        persistentVolumeClaim:
+          claimName: jenkins-pvc
