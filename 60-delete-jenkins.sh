@@ -25,7 +25,7 @@ source ~/scripts/banner.sh
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
 lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
-yaml_files=$(ls -1 ./[0-9]*.yaml)
+yaml_files=$(ls -r1 ./[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
