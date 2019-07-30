@@ -30,3 +30,4 @@ function log_banner() {
 function short_banner() {
     now=$(date +"%m-%d-%Y-%H:%M:%S")
     echo "$now : ${1}"
+}
