@@ -13,7 +13,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-storage
   local:
-    path: /datadrive/jenkins
+    path: /datadrive/jenkins-data
   nodeAffinity:
     required:
       nodeSelectorTerms:
