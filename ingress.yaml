@@ -5,7 +5,7 @@ metadata:
   namespace: jenkins
 spec:
   rules:
-  - host: jenkins.40.87.66.206.xip.io
+  - host: jenkins.${LBIP}.xip.io
     http:
       paths:
       - path: /
