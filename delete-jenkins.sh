@@ -29,9 +29,7 @@ yaml_files=$(ls -r1 ./[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
-    sed '
-            s/\${lbip}/'"$lbip"'/g;
-        ' $file | kubectl delete -f -
+    sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl delete -f -
     if [ "$?" != "0" ]; then short_banner "Error applying Jenkins!"; exit 1; fi
     echo
 done
