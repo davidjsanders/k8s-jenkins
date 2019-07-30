@@ -47,10 +47,10 @@ spec:
           name: jenkins-home
         resources:
           limits:
-            cpu: 500m
+            cpu: 2000m
             memory: 4500Mi
           requests:
-            cpu: 500m
+            cpu: 1000m
             memory: 4000Mi
       volumes:
       - name: jenkins-home
