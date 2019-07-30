@@ -12,7 +12,6 @@ spec:
   selector:
     app: jenkins
     role: master
-  type: NodePort
 ---
 apiVersion: v1
 kind: Service
