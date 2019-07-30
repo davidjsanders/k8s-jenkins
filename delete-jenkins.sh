@@ -2,9 +2,9 @@
 # -------------------------------------------------------------------
 #
 # Module:         k8s-jenkins
-# Submodule:      load-jenkins.sh
+# Submodule:      delete-jenkins.sh
 # Environments:   all
-# Purpose:        Bash shell script to apply any yaml files found in
+# Purpose:        Bash shell script to delete any yaml files found in
 #                 the jenkins directory. 
 #
 # Created on:     30 July 2019
@@ -20,7 +20,7 @@
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
 #
-source ~/scripts/banner.sh
+source ./banner.sh
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
