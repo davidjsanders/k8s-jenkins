@@ -1,11 +1,8 @@
 #!/bin/bash
-ca_crt=$(cat ~/.kube/config | grep certificate-authority-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d)
-client_crt=$(cat ~/.kube/config | grep client-certificate-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d)
-client_key=$(cat ~/.kube/config | grep client-key-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d)
 mkdir -p /tmp/jenkins
-echo $ca_crt | tee /tmp/jenkins/ca.crt
-echo $client_crt | tee /tmp/jenkins/client.crt
-echo $client_key | tee /tmp/jenkins/client.key
+cat ~/.kube/config | grep certificate-authority-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d > /tmp/jenkins/ca.crt
+cat ~/.kube/config | grep client-certificate-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d > /tmp/jenkins/client.crt
+cat ~/.kube/config | grep client-key-data | cut -d':' -f2 | tr -d '[:space:]' | base64 -d > /tmp/jenkins/client.key
 openssl pkcs12 -export \
     -out /tmp/jenkins/cert.pfx \
     -inkey /tmp/jenkins/client.key \
