@@ -22,7 +22,7 @@ spec:
         runAsUser: 1000
       containers:
       - name: master
-        image: k8s-master:32081/jenkins/jenkins:2.187-alpine
+        image: k8s-master:32080/jenkins/jenkins:2.187-alpine
         ports:
         - containerPort: 8080
         - containerPort: 50000
