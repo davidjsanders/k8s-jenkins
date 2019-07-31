@@ -9,3 +9,10 @@ openssl pkcs12 -export \
     -in /tmp/jenkins/client.crt \
     -certfile /tmp/jenkins/ca.crt \
     -password pass:ThisIsTheJenkinsCert
+echo
+echo "pfx file   : /tmp/jenkins/cert.pfx"
+echo "key        : /tmp/jenkins/client.key"
+echo "client crt : /tmp/jenkins/client.crt"
+echo "ca crt     : /tmp/jenkins/ca.crt"
+echo "passphrase : ThisIsTheJenkinsCert"
+echo
