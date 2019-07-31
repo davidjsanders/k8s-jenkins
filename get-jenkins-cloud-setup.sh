@@ -10,7 +10,8 @@ openssl pkcs12 -export \
     -out /tmp/jenkins/cert.pfx \
     -inkey /tmp/jenkins/client.key \
     -in /tmp/jenkins/client.crt \
-    -certfile /tmp/jenkins/ca.crt
+    -certfile /tmp/jenkins/ca.crt \
+    -passin ThisIsTheJenkinsCert
 
 echo
 echo "ca_crt    : $ca_crt"
