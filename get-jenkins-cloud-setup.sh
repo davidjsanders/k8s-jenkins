@@ -11,7 +11,7 @@ openssl pkcs12 -export \
     -inkey /tmp/jenkins/client.key \
     -in /tmp/jenkins/client.crt \
     -certfile /tmp/jenkins/ca.crt \
-    -passin ThisIsTheJenkinsCert
+    -password pass:ThisIsTheJenkinsCert
 
 echo
 echo "ca_crt    : $ca_crt"
