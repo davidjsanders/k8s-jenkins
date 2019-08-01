@@ -4,6 +4,8 @@ apiVersion: v1
 metadata:
   labels:
     type: local-storage
+    app: jenkins
+    role: jenkins-data
   name: jenkins-pv
   namespace: jenkins
 spec:
