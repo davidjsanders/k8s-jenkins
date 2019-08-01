@@ -61,6 +61,6 @@ spec:
       - name: sonarqube-data
         persistentVolumeClaim:
           claimName: sonarqube-data-pvc
-      - name: sonarqube-conf
+      - name: sonarqube-logs
         persistentVolumeClaim:
           claimName: sonarqube-logs-pvc
