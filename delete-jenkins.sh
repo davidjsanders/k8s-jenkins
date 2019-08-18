@@ -36,7 +36,12 @@ for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl delete -f -
-    if [ "$?" != "0" ]; then short_banner "Error applying $file - skipping"; fi
+    if [ "$?" != "0" ];
+    then 
+        short_banner "*****";
+        short_banner "Error applying $file - skipping";
+        short_banner "*****";
+    fi
     echo
 done
 
