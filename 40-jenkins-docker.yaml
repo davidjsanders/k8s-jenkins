@@ -17,19 +17,16 @@ spec:
         app: jenkins
         role: master
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
       containers:
       - name: docker-in-docker
-        image: k8s-master:32080/docker:19.03.1-dind
-        ports:
-        - containerPort: 2375
-        command: ["dockerd"]
         args: ["-H", "tcp://0.0.0.0:2375"]
+        command: ["dockerd"]
         env:
         - name: DOCKER_HOST
           value: tcp://localhost:2375
+        image: k8s-master:32080/docker:19.03.1-dind
+        ports:
+        - containerPort: 2375
         resources:
           limits:
             cpu: 2000m
@@ -44,6 +41,16 @@ spec:
         - mountPath: /var/lib/docker
           name: docker
       - name: master
+        env:
+        - name: DOCKER_HOST
+          value: tcp://localhost:2375
+        - name: JAVA_OPTS
+          value: '-Xmx4000m'
+        # - name: JENKINS_OPTS
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: jenkins
+        #       key: options
         image: k8s-master:32080/jenkins/jenkins:2.187-alpine
         ports:
         - containerPort: 8080
@@ -56,16 +63,9 @@ spec:
           timeoutSeconds: 5
           successThreshold: 2
           failureThreshold: 5
-        env:
-        - name: DOCKER_HOST
-          value: tcp://localhost:2375
-        - name: JAVA_OPTS
-          value: '-Xmx4000m'
-        # - name: JENKINS_OPTS
-        #   valueFrom:
-        #     secretKeyRef:
-        #       name: jenkins
-        #       key: options
+        securityContext:
+          fsGroup: 1000
+          runAsUser: 1000
         volumeMounts:
         - mountPath: /var/jenkins_home
           name: jenkins-home
