@@ -37,6 +37,8 @@ spec:
           requests:
             cpu: 1000m
             memory: 2000Mi
+        securityContext:
+          privileged: true
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
