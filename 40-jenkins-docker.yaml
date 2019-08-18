@@ -37,9 +37,9 @@ spec:
         securityContext:
           privileged: true
           runAsUser: 0
-        # volumeMounts:
-        # - mountPath: /var/lib/docker
-        #   name: docker
+        volumeMounts:
+        - mountPath: /var/lib/docker
+          name: docker
       - name: master
         env:
         - name: DOCKER_HOST
