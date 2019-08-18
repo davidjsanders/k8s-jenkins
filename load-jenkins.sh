@@ -23,12 +23,12 @@
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
 #
-source ~/scripts/k8s-jenkins/banner.sh
+source /datadrive/azadmin//k8s-jenkins/banner.sh
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
 lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
-yaml_files=$(ls -1 ~/scripts/k8s-jenkins/[0-9]*.yaml)
+yaml_files=$(ls -1 /datadrive/azadmin//k8s-jenkins/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
@@ -37,7 +37,7 @@ do
     echo
 done
 
-short_banner "Remember to run ~/scripts/k8s-jenkins/get-jenkins-cloud-setup.sh"
+short_banner "Remember to run /datadrive/azadmin//k8s-jenkins/get-jenkins-cloud-setup.sh"
 
 short_banner "Done."
 echo
