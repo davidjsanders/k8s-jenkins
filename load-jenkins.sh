@@ -19,6 +19,9 @@
 # 06 Aug 2019  | David Sanders               | Fix location of banner
 #              |                             | source.
 # -------------------------------------------------------------------
+# 18 Aug 2019  | David Sanders               | Change error handling
+#              |                             | to skip.
+# -------------------------------------------------------------------
 
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
@@ -33,7 +36,7 @@ for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl apply -f -
-    if [ "$?" != "0" ]; then short_banner "Error applying Jenkins!"; exit 1; fi
+    if [ "$?" != "0" ]; then short_banner "Error applying $file - skipping"; fi
     echo
 done
 
