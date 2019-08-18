@@ -27,6 +27,7 @@
 # templates/banner.sh)
 #
 source /datadrive/azadmin/k8s-jenkins/banner.sh
+error_list=""
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
@@ -36,13 +37,20 @@ for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl apply -f -
-    if [ "$?" != "0" ]; 
+    ret_stat="$?"
+    if [ "$ret_stat" != "0" ]; 
     then 
         short_banner "*****"; 
         short_banner "Error applying $file - skipping"; 
         short_banner "*****"; 
+        error_list=$error_list" ${file}---${ret_stat}"
     fi
     echo
+done
+
+for err in $error_list
+do
+  echo ">>> ERROR: $err"
 done
 
 short_banner "Remember to run /datadrive/azadmin//k8s-jenkins/get-jenkins-cloud-setup.sh"
