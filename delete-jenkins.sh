@@ -16,16 +16,19 @@
 # -------------------------------------------------------------------
 # 30 Jul 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
+# 06 Aug 2019  | David Sanders               | Fix location of banner
+#              |                             | source.
+# -------------------------------------------------------------------
 
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
 #
-source ./banner.sh
+source ~/scripts/k8s-jenkins/banner.sh
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
 lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
-yaml_files=$(ls -r1 ./[0-9]*.yaml)
+yaml_files=$(ls -r1 ~/scripts/k8s-jenkins/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
