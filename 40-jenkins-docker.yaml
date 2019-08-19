@@ -44,6 +44,8 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
+        - mountPath: /etc/docker/daemon.json
+          name: daemon-json
       - name: jenkins
         env:
         - name: DOCKER_HOST
@@ -87,3 +89,9 @@ spec:
       - name: docker
         persistentVolumeClaim:
           claimName: docker-pvc
+      - name: daemon-json
+        configMap:
+          name: docker-daemon
+          items:
+          - key: daemon.json
+            path: daemon.json
