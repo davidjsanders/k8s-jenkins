@@ -63,7 +63,7 @@ spec:
           timeoutSeconds: 5
           successThreshold: 2
           failureThreshold: 5
-          initialDelaySeconds: 120
+          initialDelaySeconds: 60
         securityContext:
           runAsUser: 1000
         volumeMounts:
