@@ -7,6 +7,10 @@ metadata:
     app: jenkins
   namespace: jenkins
 spec:
+  hostAliases:
+  - ip: "10.70.1.6"
+    hostnames:
+    - "k8s-master"
   replicas: 1
   selector:
     matchLabels:
