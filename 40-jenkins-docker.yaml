@@ -40,7 +40,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
-      - name: master
+      - name: jenkins
         env:
         - name: DOCKER_HOST
           value: tcp://localhost:2375
