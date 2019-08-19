@@ -22,6 +22,9 @@
 # 18 Aug 2019  | David Sanders               | Change error handling
 #              |                             | to skip.
 # -------------------------------------------------------------------
+# 19 Aug 2019  | David Sanders               | Chmod of data drive to
+#              |                             | root for docker.
+# -------------------------------------------------------------------
 
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
@@ -31,6 +34,10 @@ error_list=""
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
+short_banner "Changing file permissions"
+sudo chown -R root:root /datadrive/export/root
+
+short_banner "Load YAML manifests"
 lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
 yaml_files=$(ls -1 /datadrive/azadmin/k8s-jenkins/[0-9]*.yaml)
 for file in $yaml_files
