@@ -23,7 +23,7 @@ spec:
         - "k8s-master"
       containers:
       - name: docker-in-docker
-        args: ["-H", "tcp://0.0.0.0:2375"]
+        args: ["-H", "tcp://0.0.0.0:2375", "--config-file", "/etc/docker/config/daemon.json"]
         command: ["dockerd"]
         env:
         - name: DOCKER_HOST
@@ -44,7 +44,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
-        - mountPath: /etc/docker
+        - mountPath: /etc/docker/config
           name: daemon-json
       - name: jenkins
         env:
