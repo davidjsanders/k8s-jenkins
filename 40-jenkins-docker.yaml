@@ -44,7 +44,7 @@ spec:
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
-        - mountPath: /etc/docker/daemon.json
+        - mountPath: /etc/docker
           name: daemon-json
       - name: jenkins
         env:
