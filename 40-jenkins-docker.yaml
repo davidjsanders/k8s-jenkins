@@ -41,6 +41,7 @@ spec:
         securityContext:
           privileged: true
           runAsUser: 0
+          allowPrivilegeEscalation: true
         volumeMounts:
         - mountPath: /var/lib/docker
           name: docker
