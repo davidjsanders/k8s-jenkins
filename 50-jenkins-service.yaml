@@ -13,6 +13,10 @@ spec:
     protocol: TCP
     port: 50000
     targetPort: 50000
+  - name: docker
+    protocol: TCP
+    port: 2375
+    targetPort: 2375
   selector:
     app: jenkins
     role: master
