@@ -15,7 +15,7 @@ spec:
     - ReadWriteOnce
   storageClassName: local-storage
   local:
-    path: /datadrive/docker
+    path: /datadrive/root/docker
   nodeAffinity:
     required:
       nodeSelectorTerms:
