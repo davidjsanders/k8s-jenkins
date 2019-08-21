@@ -21,7 +21,7 @@ spec:
         runAsUser: 999
       containers:
       - name: master
-        image: k8s-master:32080/sonarqube:7.9.1-community
+        image: ${registry}sonarqube:7.9.1-community
         ports:
         - containerPort: 9000
         # readinessProbe:
@@ -47,13 +47,13 @@ spec:
           name: sonarqube-data
         - mountPath: /opt/sonarqube/logs
           name: sonarqube-logs
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 4500Mi
-          requests:
-            cpu: 1000m
-            memory: 4000Mi
+        # resources:
+        #   limits:
+        #     cpu: 2000m
+        #     memory: 4500Mi
+        #   requests:
+        #     cpu: 1000m
+        #     memory: 4000Mi
       volumes:
       - name: sonarqube-conf
         persistentVolumeClaim:

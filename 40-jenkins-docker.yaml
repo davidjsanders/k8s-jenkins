@@ -28,16 +28,16 @@ spec:
         env:
         - name: DOCKER_HOST
           value: tcp://localhost:2375
-        image: k8s-master:32080/docker:19.03.1-dind
+        image: ${registry}docker:19.03.1-dind
         ports:
         - containerPort: 2375
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 4000Mi
-          requests:
-            cpu: 1000m
-            memory: 2000Mi
+        # resources:
+        #   limits:
+        #     cpu: 2000m
+        #     memory: 4000Mi
+        #   requests:
+        #     cpu: 1000m
+        #     memory: 2000Mi
         securityContext:
           privileged: true
           runAsUser: 0
@@ -58,7 +58,7 @@ spec:
         #     secretKeyRef:
         #       name: jenkins
         #       key: options
-        image: k8s-master:32080/jenkins/jenkins:2.187-alpine
+        image: ${registry}jenkins/jenkins:2.187-alpine
         ports:
         - containerPort: 8080
         - containerPort: 50000
@@ -76,13 +76,13 @@ spec:
         volumeMounts:
         - mountPath: /var/jenkins_home
           name: jenkins-home
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 4500Mi
-          requests:
-            cpu: 1000m
-            memory: 4000Mi
+        # resources:
+        #   limits:
+        #     cpu: 2000m
+        #     memory: 4500Mi
+        #   requests:
+        #     cpu: 1000m
+        #     memory: 4000Mi
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:
