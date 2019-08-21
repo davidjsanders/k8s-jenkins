@@ -35,7 +35,13 @@ yaml_files=$(ls -r1 ${datapath:-/datadrive/azadmin/k8s-jenkins}/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
-    sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl delete -f -
+    sed '
+      s/\${lbip}/'"${lbip:-.none.xip.io}"'/g;
+      s/\${storageclass}/'"${storageclass:-local-storage}"'/g;
+      s/\${selectorkey}/'"${selectorkey:-role}"'/g;
+      s/\${selectorvalue}/'"${selectorvalue:-worker}"'/g;
+      s/\${registry}/'"${registry:-k8s-master:32080\/}"'/g;
+    ' $file | kubectl delete -f -
     if [ "$?" != "0" ];
     then 
         short_banner "*****";
