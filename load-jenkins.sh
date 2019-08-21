@@ -38,13 +38,13 @@ log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 #sudo chown -R root:root /datadrive/export/root
 
 short_banner "Load YAML manifests"
-lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
+//lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
 yaml_files=$(ls -1 ${datapath:-/datadrive/azadmin/k8s-jenkins}/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed '
-      s/\${lbip}/'"${lbip:-'.none.xip.io'}"'/g;
+      s/\${lbip}/'"${lbip:-.none.xip.io}"'/g;
       s/\${storageclass}/'"${storageclass:-local-storage}"'/g;
       s/\${selectorkey}/'"${selectorkey:-role}"'/g;
       s/\${selectorvalue}/'"${selectorvalue:-worker}"'/g;
