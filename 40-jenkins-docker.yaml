@@ -28,15 +28,15 @@ spec:
         env:
         - name: DOCKER_HOST
           value: tcp://localhost:2375
-        image: k8s-master:32080/docker:19.03.1-dind
+        image: ${registry}docker:19.03.1-dind
         ports:
         - containerPort: 2375
         resources:
           limits:
-            cpu: 2000m
-            memory: 4000Mi
+            cpu: .5
+            memory: 3000Mi
           requests:
-            cpu: 1000m
+            cpu: .25
             memory: 2000Mi
         securityContext:
           privileged: true
@@ -58,7 +58,7 @@ spec:
         #     secretKeyRef:
         #       name: jenkins
         #       key: options
-        image: k8s-master:32080/jenkins/jenkins:2.187-alpine
+        image: ${registry}jenkins/jenkins:2.190-alpine
         ports:
         - containerPort: 8080
         - containerPort: 50000
@@ -78,10 +78,10 @@ spec:
           name: jenkins-home
         resources:
           limits:
-            cpu: 2000m
+            cpu: 2
             memory: 4500Mi
           requests:
-            cpu: 1000m
+            cpu: .5
             memory: 4000Mi
       volumes:
       - name: jenkins-home

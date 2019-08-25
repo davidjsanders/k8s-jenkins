@@ -3,7 +3,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   labels:
-    type: local-storage
+    type: ${storageclass}
     app: jenkins
     role: jenkins-data
   name: jenkins-pv
@@ -13,15 +13,15 @@ spec:
     storage: 2500Mi
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-storage
+  storageClassName: ${storageclass}
   local:
     path: /datadrive/jenkins-data
   nodeAffinity:
     required:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: role
+        - key: "${selectorkey}"
           operator: In
           values:
-          - "worker"
+          - "${selectorvalue}"
   persistentVolumeReclaimPolicy: Retain

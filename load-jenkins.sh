@@ -29,21 +29,30 @@
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
 #
-source /datadrive/azadmin/k8s-jenkins/banner.sh
+source ${datapath:-/datadrive/azadmin/k8s-jenkins}/banner.sh
 error_list=""
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
-short_banner "Changing file permissions"
-sudo chown -R root:root /datadrive/export/root
+#short_banner "Changing file permissions"
+#sudo chown -R root:root /datadrive/export/root
 
 short_banner "Load YAML manifests"
-lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
-yaml_files=$(ls -1 /datadrive/azadmin/k8s-jenkins/[0-9]*.yaml)
+if [ -z "$lbip" ]; then
+    lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
+fi
+
+yaml_files=$(ls -1 ${datapath:-/datadrive/azadmin/k8s-jenkins}/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
-    sed 's/\${lbip}/'"$lbip"'/g' $file | kubectl apply -f -
+    sed '
+      s/\${lbip}/'"${lbip:-.none.xip.io}"'/g;
+      s/\${storageclass}/'"${storageclass:-local-storage}"'/g;
+      s/\${selectorkey}/'"${selectorkey:-role}"'/g;
+      s/\${selectorvalue}/'"${selectorvalue:-worker}"'/g;
+      s/\${registry}/'"${registry:-k8s-master:32080\/}"'/g;
+    ' $file | kubectl apply -f -
     ret_stat="$?"
     if [ "$ret_stat" != "0" ]; 
     then 
