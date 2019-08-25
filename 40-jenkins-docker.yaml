@@ -31,13 +31,13 @@ spec:
         image: ${registry}docker:19.03.1-dind
         ports:
         - containerPort: 2375
-        # resources:
-        #   limits:
-        #     cpu: 2000m
-        #     memory: 4000Mi
-        #   requests:
-        #     cpu: 1000m
-        #     memory: 2000Mi
+        resources:
+          limits:
+            cpu: .5
+            memory: 3000Mi
+          requests:
+            cpu: .25
+            memory: 2000Mi
         securityContext:
           privileged: true
           runAsUser: 0
@@ -78,10 +78,10 @@ spec:
           name: jenkins-home
         resources:
           limits:
-            cpu: 2000m
+            cpu: 2
             memory: 4500Mi
           requests:
-            cpu: 1000m
+            cpu: .5
             memory: 4000Mi
       volumes:
       - name: jenkins-home
