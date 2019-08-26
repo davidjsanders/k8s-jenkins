@@ -44,6 +44,7 @@ then
     short_banner "Rerun setting domain_name=\".thedomain.com\" before running"
     short_banner "Note: no . is added between the service name and the domain; "
     short_banner "      include it if you need it, e.g. .mydomain.com"
+    echo
     exit 1
 fi
 
