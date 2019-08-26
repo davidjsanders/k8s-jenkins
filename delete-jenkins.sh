@@ -30,13 +30,24 @@ source ${datapath:-/datadrive/azadmin/k8s-jenkins}/banner.sh
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
-lbip=$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)
+short_banner "Checking mandatory variables"
+if [ -z "$domain_name" ]
+then
+    short_banner "domain_name *NOT* found; unable to continue."
+    short_banner "Rerun setting domain_name=\".thedomain.com\" before running"
+    short_banner "Note: no . is added between the service name and the domain; "
+    short_banner "      include it if you need it, e.g. .mydomain.com"
+    echo
+    exit 1
+fi
+
+short_banner "Remove YAML manifests"
 yaml_files=$(ls -r1 ${datapath:-/datadrive/azadmin/k8s-jenkins}/[0-9]*.yaml)
 for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed '
-      s/\${lbip}/'"${lbip:-.none.xip.io}"'/g;
+      s/\${domain_name}/'"${domain_name}"'/g;
       s/\${storageclass}/'"${storageclass:-local-storage}"'/g;
       s/\${selectorkey}/'"${selectorkey:-role}"'/g;
       s/\${selectorvalue}/'"${selectorvalue:-worker}"'/g;
