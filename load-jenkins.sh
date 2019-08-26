@@ -38,10 +38,11 @@ error_list=""
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
 short_banner "Checking mandatory variables"
-if [ -z "$domain_name" ]; then
+if [ -z "$domain_name" ]
+then
     short_banner "domain_name *NOT* found; unable to continue."
     short_banner "Rerun setting domain_name=\".thedomain.com\" before running"
-    short_banner "Note: no . is added between the service name and the domain; include it if you need it" before running"
+    short_banner "Note: no . is added between the service name and the domain; include it if you need it before running"
     exit 1
 fi
 
