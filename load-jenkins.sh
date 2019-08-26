@@ -54,7 +54,6 @@ for file in $yaml_files
 do
     short_banner "Applying yaml for: $file"
     sed '
-      s/\${lbip}/'"${lbip:-.none.xip.io}"'/g;
       s/\${domain_name}/'"${domain_name}"'/g;
       s/\${storageclass}/'"${storageclass:-local-storage}"'/g;
       s/\${selectorkey}/'"${selectorkey:-role}"'/g;
