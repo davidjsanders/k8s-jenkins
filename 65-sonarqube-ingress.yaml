@@ -6,7 +6,7 @@ metadata:
   namespace: jenkins
 spec:
   rules:
-  - host: sonarqube${lbip}
+  - host: sonarqube${domain_name}
     http:
       paths:
       - path: /

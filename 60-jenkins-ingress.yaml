@@ -6,7 +6,7 @@ metadata:
   namespace: jenkins
 spec:
   rules:
-  - host: jenkins${lbip}
+  - host: jenkins${domain_name}
     http:
       paths:
       - path: /
