@@ -25,6 +25,9 @@
 # 19 Aug 2019  | David Sanders               | Chmod of data drive to
 #              |                             | root for docker.
 # -------------------------------------------------------------------
+# 26 Aug 2019  | David Sanders               | Add mandatory variable
+#              |                             | checking.
+# -------------------------------------------------------------------
 
 # Include the banner function for logging purposes (see
 # templates/banner.sh)
@@ -34,14 +37,15 @@ error_list=""
 
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
-#short_banner "Changing file permissions"
-#sudo chown -R root:root /datadrive/export/root
-
-short_banner "Load YAML manifests"
-if [ -z "$lbip" ]; then
-    lbip="."$(cat ~/lbip.txt | grep "export LBIP" | cut -d'=' -f2)".xip.io"
+short_banner "Checking mandatory variables"
+if [ -z "$domain_name" ]; then
+    short_banner "domain_name *NOT* found; unable to continue."
+    short_banner "Rerun setting domain_name=\".thedomain.com\" before running"
+    short_banner "Note: no . is added between the service name and the domain; include it if you need it" before running"
+    exit 1
 fi
 
+short_banner "Load YAML manifests"
 yaml_files=$(ls -1 ${datapath:-/datadrive/azadmin/k8s-jenkins}/[0-9]*.yaml)
 for file in $yaml_files
 do
