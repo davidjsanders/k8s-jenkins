@@ -58,7 +58,7 @@ spec:
         #     secretKeyRef:
         #       name: jenkins
         #       key: options
-        image: ${registry}jenkins/jenkins:2.190-alpine
+        image: ${registry}jenkins/jenkins:2.192-alpine
         ports:
         - containerPort: 8080
         - containerPort: 50000
