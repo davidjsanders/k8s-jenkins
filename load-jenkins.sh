@@ -38,9 +38,10 @@ error_list=""
 log_banner "load-jenkins.sh" "Apply NFS Provisioner"
 
 short_banner "Checking mandatory variables"
-if [ -z "$domain_name" ]
+if [ -z "$domain_name" ] || \
+   [ -z "$nexus_creds" ]
 then
-    short_banner "domain_name *NOT* found; unable to continue."
+    short_banner "domain_name or nexus_creds *NOT* found; unable to continue."
     short_banner "Rerun setting domain_name=\".thedomain.com\" before running"
     short_banner "Note: no . is added between the service name and the domain; "
     short_banner "      include it if you need it, e.g. .mydomain.com"

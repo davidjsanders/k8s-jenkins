@@ -8,7 +8,12 @@ data:
             "k8s-master:32081",
             "k8s-master:32082",
             "k8s-master:32083",
-            "k8s-master:32084"
+            "k8s-master:32084",
+            "nexus-docker.default.svc.cluster.local:18080"
+            "nexus-docker.default.svc.cluster.local:18081"
+            "nexus-docker.default.svc.cluster.local:18082"
+            "nexus-docker.default.svc.cluster.local:18083"
+            "nexus-docker.default.svc.cluster.local:18084"
         ]
     }
 kind: ConfigMap
