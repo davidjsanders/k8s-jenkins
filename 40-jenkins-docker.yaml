@@ -83,6 +83,8 @@ spec:
           requests:
             cpu: .5
             memory: 4000Mi
+      imagePullSecrets:
+      - name: regcred
       volumes:
       - name: jenkins-home
         persistentVolumeClaim:

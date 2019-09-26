@@ -54,6 +54,8 @@ spec:
         #   requests:
         #     cpu: 1000m
         #     memory: 4000Mi
+      imagePullSecrets:
+      - name: regcred
       volumes:
       - name: sonarqube-conf
         persistentVolumeClaim:
